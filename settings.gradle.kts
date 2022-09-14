@@ -1,0 +1,16 @@
+rootProject.name = "app"
+
+include(":app")
+include(":base")
+include(":components")
+include(":core")
+include(":home")
+include(":posts")
+include(":posts-domain")
+include(":posts-entities")
+include(":authors")
+include(":author-domain")
+include(":author-entities")
+include(":comments")
+include(":comments-domain")
+include(":comments-entities")

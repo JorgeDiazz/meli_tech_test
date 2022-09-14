@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ToggleButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toggle_favorite_dark"
+    style="@style/toggleButton"
+    android:layout_width="@dimen/height_icon_small_250"
+    android:layout_height="@dimen/height_icon_small_250"
+    android:background="@drawable/ic_star_toggle_bg_dark"
+    android:gravity="center"
+    app:layout_constraintBottom_toTopOf="@id/textView_favorite"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/guideline"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="ContentDescription" />
