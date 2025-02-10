@@ -92,4 +92,4 @@ In order to sign your debug app build using _debug-keystore.jks_ keystore, these
 
 ### Landscape mode
 
-<img src="docs/images/demo.gif" width="600" height="350"/>
+<img src="docs/images/landscape_mode.gif" width="600" height="350"/>
