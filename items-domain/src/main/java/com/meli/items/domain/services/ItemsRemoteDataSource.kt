@@ -6,6 +6,6 @@ import javax.inject.Inject
 class ItemsRemoteDataSource @Inject constructor(private val itemsService: ItemsService) :
   BaseApiResponse() {
 
-  suspend fun searchItems(start: Int, limit: Int) =
-    safeApiCall { itemsService.searchItems("motorola", start, limit) }
+  suspend fun searchItems(query: String, offset: Int, limit: Int) =
+    safeApiCall { itemsService.searchItems(query, offset, limit) }
 }

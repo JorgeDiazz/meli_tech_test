@@ -21,8 +21,13 @@ import com.meli.items.entities.RemoteKeysRoom
  *
  */
 @ExperimentalPagingApi
-class ItemsMediator(private val logger: Logger, private val cache: Cache, private val itemsRemoteDataSource: ItemsRemoteDataSource, private val appDatabase: ItemsDatabase) :
-    RemoteMediator<Int, Item>() {
+class ItemsMediator(
+    private val logger: Logger,
+    private val cache: Cache,
+    private val itemsRemoteDataSource: ItemsRemoteDataSource,
+    private val appDatabase: ItemsDatabase,
+    private val query: String
+) : RemoteMediator<Int, Item>() {
 
     companion object {
         const val DEFAULT_PAGE_INDEX = 0
@@ -45,10 +50,16 @@ class ItemsMediator(private val logger: Logger, private val cache: Cache, privat
             val readItemsFromRemoteKey = cache.readBoolean(READ_ITEMS_FROM_REMOTE_KEY, true)
 
             val itemsResponseNetworkState: NetworkState<SearchItemsResponse> = if (readItemsFromRemoteKey) {
-                itemsRemoteDataSource.searchItems(page, state.config.pageSize)
+                if (loadType == LoadType.REFRESH) {
+                    appDatabase.withTransaction {
+                        appDatabase.getRepoDao().clearRemoteKeys()
+                        appDatabase.getItemsDao().clearAllItems()
+                    }
+                }
+
+                itemsRemoteDataSource.searchItems(query, page, state.config.pageSize)
             } else {
                 appDatabase.getRepoDao().clearRemoteKeys()
-
                 NetworkState.Success(SearchItemsResponse(resultXES = listOf()))
             }
 
@@ -87,7 +98,7 @@ class ItemsMediator(private val logger: Logger, private val cache: Cache, privat
             LoadType.APPEND -> {
                 val remoteKeys = getLastRemoteKey(state)
 
-                remoteKeys?.nextKey
+              remoteKeys?.nextKey ?: return MediatorResult.Success(endOfPaginationReached = true)
             }
             LoadType.PREPEND -> {
                 val remoteKeys = getFirstRemoteKey(state)

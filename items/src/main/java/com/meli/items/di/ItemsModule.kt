@@ -21,7 +21,7 @@ object ItemsModule {
   @Provides
   @GetItems
   @Singleton
-  fun providesGetItemsUseCase(itemsRepository: IItemsRepository): FlowUseCase<Unit, PagingData<Item>> {
+  fun providesGetItemsUseCase(itemsRepository: IItemsRepository): FlowUseCase<String, PagingData<Item>> {
     return SearchItemsUseCase(itemsRepository)
   }
 

@@ -25,11 +25,11 @@ class ItemsRepository @Inject constructor(
   private val itemsDatabase: ItemsDatabase,
 ) : BaseApiResponse(), IItemsRepository {
 
-    override fun searchItems(pagingConfig: PagingConfig): Flow<PagingData<Item>> {
+    override fun searchItems(query: String, pagingConfig: PagingConfig): Flow<PagingData<Item>> {
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = { itemsDatabase.getItemsDao().getPagingSource() },
-            remoteMediator = ItemsMediator(logger, cache, remoteDataSource, itemsDatabase),
+            remoteMediator = ItemsMediator(logger, cache, remoteDataSource, itemsDatabase, query),
         ).flow
     }
 }

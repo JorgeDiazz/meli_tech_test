@@ -79,3 +79,7 @@ In order to sign your debug app build using _debug-keystore.jks_ keystore, these
 2. Project utilities file can be found [here](docs/utilities.md).
 
 ## Using the app
+
+<img src="docs/images/demo.webm" width="350" height="600"/>
+
+

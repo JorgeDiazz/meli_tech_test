@@ -2,6 +2,8 @@ package com.meli.items
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,6 +23,7 @@ import com.app.base.interfaces.Cache
 import com.app.base.interfaces.Logger
 import com.app.base.others.READ_ITEMS_FROM_REMOTE_KEY
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.meli.components.utils.viewBinding
 import com.meli.items.databinding.FragmentItemsBinding
 import com.meli.items.domain.data.ItemsState
@@ -53,6 +56,8 @@ class ItemsFragment : Fragment(R.layout.fragment_items), ItemsAdapter.OnClickLis
     private lateinit var itemsRecyclerView: RecyclerView
     private lateinit var itemsAdapter: ItemsAdapter
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var searchEditText: TextInputEditText
+    private lateinit var searchButton: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +70,7 @@ class ItemsFragment : Fragment(R.layout.fragment_items), ItemsAdapter.OnClickLis
 
     private fun initializeView() {
         setUpRecyclerView()
+        setUpSearchView()
     }
 
     private fun setUpRecyclerView() {
@@ -99,7 +105,34 @@ class ItemsFragment : Fragment(R.layout.fragment_items), ItemsAdapter.OnClickLis
 
     }
 
-      private fun initializeViewModel() {
+    private fun setUpSearchView() {
+        searchEditText = binding.searchEditText
+        searchButton = binding.searchButton
+
+        searchButton.setOnClickListener {
+            performSearch()
+        }
+
+        searchEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch()
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun performSearch() {
+        val query = searchEditText.text?.toString()?.trim() ?: ""
+        if (query.isNotEmpty()) {
+            cache.saveBoolean(READ_ITEMS_FROM_REMOTE_KEY, true)
+            itemsAdapter.submitData(lifecycle, PagingData.empty())
+            viewModel.searchItems(query)
+        }
+    }
+
+    private fun initializeViewModel() {
         viewModel.onViewActive()
     }
 

@@ -9,4 +9,7 @@
     <string name="loading_resources_from_local_database">Loading resources from local database…</string>
 
     <string name="error_occurred_getting_items">An error has occurred when getting items!</string>
+
+    <string name="search_items">Search items...</string>
+    <string name="search">Search</string>
 </resources>

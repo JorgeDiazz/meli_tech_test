@@ -15,9 +15,10 @@ import javax.inject.Inject
 @ExperimentalPagingApi
 class SearchItemsUseCase @Inject constructor(
   private val itemsRepository: IItemsRepository,
-) : FlowUseCase<Unit, PagingData<Item>>() {
+) : FlowUseCase<String, PagingData<Item>>() {
 
-    override suspend fun execute(input: Unit): Flow<PagingData<Item>> {
-        return itemsRepository.searchItems()
-    }
+  private val defaultSearch = "celular"
+  override suspend fun execute(input: String): Flow<PagingData<Item>> {
+    return itemsRepository.searchItems(query = input.ifEmpty { defaultSearch })
+  }
 }

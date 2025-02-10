@@ -14,7 +14,7 @@ interface ItemsService {
   @GET("search")
   suspend fun searchItems(
     @Query("q") query: String,
-    @Query("_start") start: Int,
-    @Query("_limit") limit: Int
+    @Query("offset") offset: Int,
+    @Query("limit") limit: Int
   ): Response<SearchItemsResponse>
 }

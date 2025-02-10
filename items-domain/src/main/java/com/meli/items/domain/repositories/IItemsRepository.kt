@@ -13,7 +13,10 @@ import kotlinx.coroutines.flow.Flow
  */
 @ExperimentalPagingApi
 interface IItemsRepository {
-  fun searchItems(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<Item>>
+  fun searchItems(
+    query: String,
+    pagingConfig: PagingConfig = getDefaultPageConfig()
+  ): Flow<PagingData<Item>>
 
   private fun getDefaultPageConfig(): PagingConfig {
     return PagingConfig(

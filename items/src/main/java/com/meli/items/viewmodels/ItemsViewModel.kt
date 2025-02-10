@@ -26,6 +26,9 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
+
+
 /**
  * Represents the ViewModel layer of ItemsFragment & ItemDetailsFragment.
  *
@@ -34,7 +37,7 @@ import javax.inject.Inject
 @ExperimentalPagingApi
 class ItemsViewModel @Inject constructor(
   private val resources: AppResources,
-  @GetItems private val searchItemsUseCase: FlowUseCase<Unit, PagingData<Item>>,
+  @GetItems private val searchItemsUseCase: FlowUseCase<String, PagingData<Item>>,
 ) : ViewModel() {
 
   private val _itemsPagingStateFlow = MutableStateFlow<PagingData<ItemUiModel>>(PagingData.empty())
@@ -44,11 +47,11 @@ class ItemsViewModel @Inject constructor(
   val newsSharedFlow: SharedFlow<ItemsState> = _newsSharedFlow
 
   fun onViewActive() {
-    loadItems()
+    searchItems() // Default search
   }
 
-  private fun loadItems() = viewModelScope.launch {
-    searchItemsUseCase.execute(Unit).cachedIn(viewModelScope).distinctUntilChanged()
+  fun searchItems(query: String = "") = viewModelScope.launch {
+    searchItemsUseCase.execute(query).cachedIn(viewModelScope).distinctUntilChanged()
       .flowOn(Dispatchers.IO).collectLatest {
         _itemsPagingStateFlow.value = it.toUiModel()
       }
