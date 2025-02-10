@@ -141,7 +141,7 @@ class ItemsFragment : Fragment(R.layout.fragment_items), ItemsAdapter.OnClickLis
       if (isError) {
         Toast.makeText(
           requireContext(),
-          getString(R.string.loading_resources_from_local_database),
+          getString(R.string.error_occurred_getting_items),
           Toast.LENGTH_SHORT
         ).show()
       }

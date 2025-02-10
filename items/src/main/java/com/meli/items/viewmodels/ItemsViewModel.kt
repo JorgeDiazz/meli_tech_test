@@ -8,6 +8,7 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.app.base.interfaces.FlowUseCase
 import com.app.core.interfaces.AppResources
+import com.meli.items.R
 import com.meli.items.domain.data.Item
 import com.meli.items.domain.data.ItemsState
 import com.meli.items.qualifiers.GetItems
@@ -34,7 +35,7 @@ import javax.inject.Inject
 @ExperimentalPagingApi
 class ItemsViewModel @Inject constructor(
   private val resources: AppResources,
-  @GetItems private val searchItemsUseCase: FlowUseCase<String, PagingData<Item>>,
+  @GetItems private val searchItemsUseCase: FlowUseCase<String, PagingData<Item>>
 ) : ViewModel() {
 
   private val _itemsPagingStateFlow = MutableStateFlow<PagingData<ItemUiModel>>(PagingData.empty())
@@ -48,30 +49,34 @@ class ItemsViewModel @Inject constructor(
   }
 
   fun searchItems(query: String = "") = viewModelScope.launch {
-    searchItemsUseCase.execute(query).cachedIn(viewModelScope).distinctUntilChanged()
-      .flowOn(Dispatchers.IO).collectLatest {
-        _itemsPagingStateFlow.value = it.toUiModel()
-      }
+    try {
+      searchItemsUseCase.execute(query).cachedIn(viewModelScope).distinctUntilChanged()
+        .flowOn(Dispatchers.IO).collectLatest {
+          _itemsPagingStateFlow.value = it.toUiModel()
+        }
+    } catch (e: Exception) {
+      _newsSharedFlow.emit(ItemsState.ErrorState(resources.getString(R.string.try_again_error)))
+    }
   }
-}
 
-private fun PagingData<Item>.toUiModel(): PagingData<ItemUiModel> = map { item ->
-  item.toUiModel()
-}
-
-private fun Item.toUiModel(): ItemUiModel = ItemUiModel(
-  id = id,
-  title = title,
-  thumbnail = thumbnail,
-  price = price.toString(),
-  seller = SellerUiModel(
-    nickname = seller.nickname,
-    address = "${address.cityName}, ${address.stateName}"
-  ),
-  attributes = attributes.map { attr ->
-    AttributeUiModel(
-      name = attr.name,
-      valueName = attr.valueName
-    )
+  private fun PagingData<Item>.toUiModel(): PagingData<ItemUiModel> = map { item ->
+    item.toUiModel()
   }
-)
+
+  private fun Item.toUiModel(): ItemUiModel = ItemUiModel(
+    id = id,
+    title = title,
+    thumbnail = thumbnail,
+    price = price.toString(),
+    seller = SellerUiModel(
+      nickname = seller.nickname,
+      address = "${address.cityName}, ${address.stateName}"
+    ),
+    attributes = attributes.map { attr ->
+      AttributeUiModel(
+        name = attr.name,
+        valueName = attr.valueName
+      )
+    }
+  )
+}
