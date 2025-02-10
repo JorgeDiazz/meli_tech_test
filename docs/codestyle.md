@@ -1,7 +1,7 @@
 # Android CodeStyle
 
 ## Description
-This document serves as the definition of Zemoga’s Android coding standards for source code in the Kotlin Programming Language. The code style described below is inspired by Google's and Kotlin's style guides, as well as our own formed standard according to the experiences we have had and will have in our team (i.e. code reviews).
+This document serves as the definition of Meli’s Android coding standards for source code in the Kotlin Programming Language. The code style described below is inspired by Google's and Kotlin's style guides, as well as our own formed standard according to the experiences we have had and will have in our team (i.e. code reviews).
 
 The issues covered span not only aesthetic issues of formatting, but other types of conventions or coding standards as well. However, this document focuses primarily on the hard-and-fast rules that we follow, and avoids giving advice that isn’t clearly enforceable (whether by human or tool).
 
@@ -68,13 +68,13 @@ Package names are similar to Java: all __lower-case__, multiple words concatenat
 **WRONG:**
 
 ```kotlin
-com.zemoga.auth.use_cases
+com.meli.auth.use_cases
 ```
 
 **RIGHT:**
 
 ```kotlin
-com.zemoga.auth.usecases
+com.meli.auth.usecases
 ```
 
 ### Classes & Interfaces
@@ -464,7 +464,7 @@ Constants are defined using the `val` keyword, and variables with the `var` keyw
 Companion objects should be declared at the _top_ of the class:
 
 ```kotlin
-class ZemogaAuthenticator {
+class MeliAuthenticator {
 
   companion object {
     const val MAX_ALLOWABLE_RETRY_ATTEMPTS = 3

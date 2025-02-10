@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button_retry">Retry</string>
+    <string name="try_again_error">Something went wrong, please try again</string>
+
+    <string name="item_id">Item ID: %d</string>
+    <string name="specifications">Specifications</string>
+
+    <string name="loading_resources_from_local_database">Loading resources from local database…</string>
+
+    <string name="error_occurred_getting_items">An error has occurred when getting items!</string>
+</resources>

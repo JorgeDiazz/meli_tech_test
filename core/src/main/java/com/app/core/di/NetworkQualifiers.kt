@@ -3,7 +3,7 @@ package com.app.core.di
 import javax.inject.Qualifier
 
 @Qualifier
-annotation class RetrofitZemoga
+annotation class RetrofitMeli
 
 @Qualifier
 annotation class RetrofitBasic

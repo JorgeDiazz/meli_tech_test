@@ -29,10 +29,9 @@ dependencies {
   implementation(project(":core"))
   implementation(project(":base"))
   implementation(project(":components"))
-
-  implementation(project(":posts"))
-  implementation(project(":posts-domain"))
-  implementation(project(":posts-entities"))
+    implementation(project(":items"))
+  implementation(project(":items-domain"))
+  implementation(project(":items-entities"))
 
   implementation(Libraries.kotlinJDK)
   implementation(Libraries.appcompat)

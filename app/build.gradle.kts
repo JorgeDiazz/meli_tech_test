@@ -13,7 +13,7 @@ plugins {
 android {
   compileSdkVersion(Api.compileSDK)
   defaultConfig {
-    applicationId = "com.zemoga.app"
+    applicationId = "com.meli.app"
     minSdkVersion(Api.minSDK)
     targetSdkVersion(Api.targetSDK)
     versionCode = getNewVersionCode()
@@ -28,9 +28,9 @@ android {
   signingConfigs {
     getByName("debug") {
       val defaultPassword = "android"
-      keyAlias = "android_zemoga"
+      keyAlias = "meli-android"
       keyPassword = defaultPassword
-      storeFile = file("debug-keystore.jks")
+      storeFile = file("debug-meli-keystore.jks")
       storePassword = defaultPassword
     }
   }
@@ -57,15 +57,15 @@ android {
       dimension = "version"
       applicationIdSuffix = ".staging"
       versionNameSuffix = "-Staging"
-      manifestPlaceholders["scheme"] = "zemoga.staging"
+      manifestPlaceholders["scheme"] = "meli.staging"
       buildConfigField("String", "SCHEME", "\"${manifestPlaceholders["scheme"]}\"")
-      buildConfigField("String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\"")
+      buildConfigField("String", "BASE_URL", "\"https://api.mercadolibre.com/sites/MLA/\"")
     }
     create("production") {
       dimension = "version"
-      manifestPlaceholders["scheme"] = "zemoga.production"
+      manifestPlaceholders["scheme"] = "meli.production"
       buildConfigField("String", "SCHEME", "\"${manifestPlaceholders["scheme"]}\"")
-      buildConfigField("String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\"")
+      buildConfigField("String", "BASE_URL", "\"https://api.mercadolibre.com/sites/MLA/\"")
     }
     create("internal") {
       dimension = "target"
@@ -111,18 +111,9 @@ dependencies {
   implementation(project(":core"))
 
   implementation(project(":home"))
-  implementation(project(":posts"))
-  implementation(project(":authors"))
-  implementation(project(":comments"))
-
-  implementation(project(":posts-domain"))
-  implementation(project(":posts-entities"))
-
-  implementation(project(":author-domain"))
-  implementation(project(":author-entities"))
-
-  implementation(project(":comments-domain"))
-  implementation(project(":comments-entities"))
+  implementation(project(":items"))
+  implementation(project(":items-domain"))
+  implementation(project(":items-entities"))
 
   implementation(Libraries.multidex)
 
@@ -160,7 +151,6 @@ dependencies {
 
   implementation(Libraries.lifeCycleExtensions)
   implementation(Libraries.lifeCycleRuntime)
-  implementation(Libraries.lifeCycleLiveData)
   implementation(Libraries.lifeCycleProcess)
   implementation(Libraries.lifeCycleViewModel)
   implementation(Libraries.lifeCycleViewModelKtx)
@@ -175,6 +165,8 @@ dependencies {
   implementation(Libraries.timber)
 
   implementation(Libraries.jsonSerialization)
+
+  implementation(Libraries.coil)
 
   debugImplementation(Libraries.leakCanary)
 

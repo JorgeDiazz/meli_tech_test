@@ -73,8 +73,8 @@ tasks.register("clean", Delete::class.java) {
 
 sonarqube {
     properties {
-        setProperty("sonar.organization", "zemoga")
-        setProperty("sonar.projectKey", "zemoga_android")
+        setProperty("sonar.organization", "meli")
+        setProperty("sonar.projectKey", "meli_android")
         setProperty("sonar.host.url", "https://sonarcloud.io")
         setProperty("sonar.sourceEncoding", "UTF-8")
     }
