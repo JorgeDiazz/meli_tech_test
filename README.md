@@ -80,6 +80,16 @@ In order to sign your debug app build using _debug-keystore.jks_ keystore, these
 
 ## Using the app
 
+### Demo
+
 <img src="docs/images/demo.gif" width="350" height="600"/>
 
 
+### Empty state
+
+<img src="docs/images/empty_state.png" width="350" height="600"/>
+
+
+### Landscape mode
+
+<img src="docs/images/demo.gif" width="600" height="350"/>
