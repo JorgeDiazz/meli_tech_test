@@ -80,9 +80,9 @@ object Versions {
 }
 
 object Api {
-  const val compileSDK = 32
-  const val minSDK = 21
-  const val targetSDK = 32
+  const val compileSDK = 33
+  const val minSDK = 23
+  const val targetSDK = 33
 }
 
 object Libraries {
@@ -170,6 +170,8 @@ object Libraries {
   const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
   const val kluent = "org.amshove.kluent:kluent-android:${Versions.kluent}"
 
+  const val pagingTest = "androidx.paging:paging-common:${Versions.paging}"
+
   val suiteTest = arrayOf(
     mockk,
     jUnit5,
@@ -179,8 +181,10 @@ object Libraries {
     kotlinReflect,
     jUnit,
     coroutinesTest,
-    kluent
+    kluent,
+    pagingTest
   )
+
 
   const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
   const val timber = "com.jakewharton.timber:timber:${Versions.timber}"

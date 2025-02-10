@@ -19,6 +19,7 @@ class SearchItemsUseCase @Inject constructor(
 
   private val defaultSearch = "celular"
   override suspend fun execute(input: String): Flow<PagingData<Item>> {
-    return itemsRepository.searchItems(query = input.ifEmpty { defaultSearch })
+    val query = input.trim().ifEmpty { defaultSearch }
+    return itemsRepository.searchItems(query = query)
   }
 }

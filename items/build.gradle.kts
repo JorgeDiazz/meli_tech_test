@@ -31,6 +31,19 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+  sourceSets {
+    getByName("test") {
+      java.srcDirs("src/test/java")
+    }
+  }
+
+  testOptions {
+    unitTests.isIncludeAndroidResources = true
+    unitTests.isReturnDefaultValues = true
+    animationsDisabled = true
+    execution = "ANDROIDX_TEST_ORCHESTRATOR"
+  }
 }
 
 dependencies {
@@ -38,10 +51,10 @@ dependencies {
     implementation(project(":components"))
     implementation(project(":core"))
     implementation(project(":base"))
-  implementation(project(":items-domain"))
-  implementation(project(":items-entities"))
+    implementation(project(":items-domain"))
+    implementation(project(":items-entities"))
 
-  implementation(Libraries.kotlinJDK)
+    implementation(Libraries.kotlinJDK)
     implementation(Libraries.appcompat)
     implementation(Libraries.androidXCore)
     implementation(Libraries.constraintLayout)
@@ -78,6 +91,12 @@ dependencies {
 
     androidTestImplementation(Libraries.jUnitExtKtx)
     androidTestImplementation(Libraries.espressoCore)
+
+    Libraries.suiteTest.forEach { testImplementation(it) }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 afterEvaluate {
