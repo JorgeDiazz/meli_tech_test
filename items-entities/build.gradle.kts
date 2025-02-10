@@ -1,45 +1,45 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
+  id("com.android.library")
+  kotlin("android")
+  kotlin("kapt")
 }
 
 android {
-    compileSdk = Api.compileSDK
-    defaultConfig {
-        minSdk = Api.minSDK
-        targetSdk = Api.targetSDK
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+  compileSdk = Api.compileSDK
+  defaultConfig {
+    minSdk = Api.minSDK
+    targetSdk = Api.targetSDK
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+  }
 
-    lint {
-        abortOnError = false
-    }
+  lint {
+    abortOnError = false
+  }
 
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
+  buildFeatures {
+    dataBinding = true
+    viewBinding = true
+  }
 
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+  compileOptions {
+    isCoreLibraryDesugaringEnabled = true
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+  }
 }
 
 dependencies {
 
-    implementation(Libraries.kotlinJDK)
+  implementation(Libraries.kotlinJDK)
 
-    implementation(project(":base"))
+  implementation(project(":base"))
 
-    implementation(Libraries.javaInject)
+  implementation(Libraries.javaInject)
 
-    implementation(Libraries.roomRuntime)
-    implementation(Libraries.roomKtx)
-    kapt(Libraries.roomCompiler)
+  implementation(Libraries.roomRuntime)
+  implementation(Libraries.roomKtx)
+  kapt(Libraries.roomCompiler)
 
-    implementation(Libraries.moshi)
-    kapt(AnnotationProcessors.moshiCodegen)
+  implementation(Libraries.moshi)
+  kapt(AnnotationProcessors.moshiCodegen)
 }

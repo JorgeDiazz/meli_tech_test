@@ -1,7 +1,6 @@
 package com.app.core.network
 
 import com.app.core.exceptions.NoConnectionException
-import com.app.core.network.ServerException
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException

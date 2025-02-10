@@ -11,9 +11,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.ExperimentalPagingApi
+import coil.load
 import com.app.base.None
 import com.app.base.interfaces.Logger
 import com.meli.components.utils.viewBinding
+import com.meli.items.databinding.FragmentItemDetailsBinding
 import com.meli.items.domain.data.ItemsState
 import com.meli.items.view.uimodel.AttributeUiModel
 import com.meli.items.view.uimodel.ItemUiModel
@@ -23,8 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import coil.load
-import com.meli.items.databinding.FragmentItemDetailsBinding
 
 /**
  * Represents the detailed information of a given item.
@@ -75,7 +75,6 @@ class ItemDetailsFragment : DialogFragment(R.layout.fragment_item_details) {
   private fun setUpItemView(itemUiModel: ItemUiModel) {
     binding.contentItemDetails.textViewItemTitle.text = itemUiModel.title
     binding.contentItemDetails.textViewItemPrice.text = itemUiModel.price
-
   }
 
   private fun setUpAttributesView(attributesUiModel: List<AttributeUiModel>) {
@@ -100,7 +99,6 @@ class ItemDetailsFragment : DialogFragment(R.layout.fragment_item_details) {
     )
   }
 
-
   private fun initializeToolbar() {
     binding.toolbarItemDetails.apply {
       (requireActivity() as AppCompatActivity).setSupportActionBar(this.toolbar)
@@ -115,7 +113,6 @@ class ItemDetailsFragment : DialogFragment(R.layout.fragment_item_details) {
   }
 
   private fun popFragment() = requireActivity().onBackPressed()
-
 
   private fun initializeNewsSubscription() {
     lifecycleScope.launch {

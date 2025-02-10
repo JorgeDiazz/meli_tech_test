@@ -29,7 +29,7 @@ dependencies {
   implementation(project(":core"))
   implementation(project(":base"))
   implementation(project(":components"))
-    implementation(project(":items"))
+  implementation(project(":items"))
   implementation(project(":items-domain"))
   implementation(project(":items-entities"))
 

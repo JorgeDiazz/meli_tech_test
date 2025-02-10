@@ -92,7 +92,6 @@ class ItemsFragment : Fragment(R.layout.fragment_items), ItemsAdapter.OnClickLis
           ).show()
           swipeRefreshLayout.isRefreshing = false
         }
-
       }
     }
 
@@ -110,7 +109,6 @@ class ItemsFragment : Fragment(R.layout.fragment_items), ItemsAdapter.OnClickLis
 
       itemsAdapter.refresh()
     }
-
   }
 
   private fun setUpSearchView() {

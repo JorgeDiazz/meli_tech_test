@@ -12,9 +12,9 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class BaseModule {
-    @Binds
-    abstract fun bindContext(meliApp: Application): Context
+  @Binds
+  abstract fun bindContext(meliApp: Application): Context
 
-    @Binds
-    abstract fun bindResources(meliResources: MeliResources): AppResources
+  @Binds
+  abstract fun bindResources(meliResources: MeliResources): AppResources
 }

@@ -1,13 +1,13 @@
 package com.app.base.interfaces
 
 interface Cache {
-    fun saveBoolean(key: String, value: Boolean)
+  fun saveBoolean(key: String, value: Boolean)
 
-    fun readBoolean(key: String, default: Boolean): Boolean
+  fun readBoolean(key: String, default: Boolean): Boolean
 
-    fun removeValue(key: String)
+  fun removeValue(key: String)
 
-    fun containsValues(): Boolean
+  fun containsValues(): Boolean
 
-    fun clearAll()
+  fun clearAll()
 }

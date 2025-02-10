@@ -25,12 +25,10 @@ Furthermore, some libraries and frameworks such as:
 * _Timber_ for logging purposes.
 * Android Studio _EditorConfig_ file to maintain consistent coding styles.
 * Gradle’s Kotlin _DSL_.
-* _SonarCloud_ for static code analysis.
-* _SonarQube_ configuration files.
-* _JaCoCo_ maven plugin to generate test coverage reports.
 * _ktlint_ for static code analysis.
 * _LeakCanary_ for memory leaks detection.
 * _dokka_ for Kotlin's documentation generation.
+* _JUnit5_ and _Mockito_ for unit testing.
 
 ## Installation
 

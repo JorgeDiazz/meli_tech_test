@@ -12,91 +12,91 @@ import com.meli.components.R
 import com.meli.components.databinding.AppToolbarBinding
 
 class AppToolbar @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
+  context: Context,
+  attrs: AttributeSet? = null,
 ) : LinearLayout(context, attrs) {
 
-    val toolbar: Toolbar
-    private var toolbarMenuId = -1
+  val toolbar: Toolbar
+  private var toolbarMenuId = -1
 
-    private val padding = resources.getDimensionPixelSize(R.dimen.spacing_normal_600)
+  private val padding = resources.getDimensionPixelSize(R.dimen.spacing_normal_600)
 
-    init {
-        val layoutParams =
-            MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        setLayoutParams(layoutParams)
+  init {
+    val layoutParams =
+      MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    setLayoutParams(layoutParams)
 
-        val binding = AppToolbarBinding.inflate(LayoutInflater.from(context), this, true)
-        toolbar = binding.toolbarCustom
+    val binding = AppToolbarBinding.inflate(LayoutInflater.from(context), this, true)
+    toolbar = binding.toolbarCustom
 
-        setBackgroundResource(R.color.white)
+    setBackgroundResource(R.color.white)
 
-        val attributes = context.obtainStyledAttributes(attrs, R.styleable.AppToolbar)
-        val showBackButton = attributes.getBoolean(R.styleable.AppToolbar_showBackButton, false)
-        setBackButton(showBackButton)
+    val attributes = context.obtainStyledAttributes(attrs, R.styleable.AppToolbar)
+    val showBackButton = attributes.getBoolean(R.styleable.AppToolbar_showBackButton, false)
+    setBackButton(showBackButton)
 
-        styleToolbarWithLightTheme()
+    styleToolbarWithLightTheme()
 
-        attributes.recycle()
+    attributes.recycle()
+  }
+
+  private fun setPaddingForToolbar() {
+    when {
+      toolbarMenuId != -1 && toolbar.navigationIcon != null -> toolbar.setPadding(0, 0, 0, 0)
+      toolbar.navigationIcon != null -> toolbar.setPadding(0, 0, padding, 0)
+      toolbarMenuId != -1 -> toolbar.setPadding(padding, 0, 0, 0)
+      else -> toolbar.setPadding(padding, 0, padding, 0)
     }
+  }
 
-    private fun setPaddingForToolbar() {
-        when {
-            toolbarMenuId != -1 && toolbar.navigationIcon != null -> toolbar.setPadding(0, 0, 0, 0)
-            toolbar.navigationIcon != null -> toolbar.setPadding(0, 0, padding, 0)
-            toolbarMenuId != -1 -> toolbar.setPadding(padding, 0, 0, 0)
-            else -> toolbar.setPadding(padding, 0, padding, 0)
-        }
+  fun setToolbarMenu(@MenuRes menuId: Int) {
+    toolbar.menu.clear()
+    toolbar.inflateMenu(menuId)
+    toolbarMenuId = menuId
+
+    setPaddingForToolbar()
+  }
+
+  fun setTitle(title: String?) {
+    setPaddingForToolbar()
+
+    toolbar.title = title.orEmpty()
+  }
+
+  fun setOnMenuItemClickListener(listener: Toolbar.OnMenuItemClickListener) {
+    toolbar.setOnMenuItemClickListener(listener)
+  }
+
+  fun styleToolbarWithLightTheme() {
+    setPaddingForToolbar()
+    setBackgroundResource(R.color.white)
+
+    toolbar.setTitleTextAppearance(context, R.style.AppToolbarTitleTextAppearance_Dark)
+    toolbar.navigationIcon?.setTint(ContextCompat.getColor(context, R.color.blue_dark))
+
+    invalidate()
+    requestLayout()
+  }
+
+  fun setBackButton(show: Boolean) {
+    setPaddingForToolbar()
+
+    toolbar.navigationIcon =
+      if (show) ContextCompat.getDrawable(context, R.drawable.ic_arrow_back) else null
+
+    toolbar.navigationIcon?.setTint(
+      ContextCompat.getColor(
+        context,
+        R.color.blue_dark
+      )
+    )
+  }
+
+  fun setBackButtonListener(listener: () -> Unit) {
+    toolbar.apply {
+      setNavigationOnClickListener {
+        listener.invoke()
+      }
     }
-
-    fun setToolbarMenu(@MenuRes menuId: Int) {
-        toolbar.menu.clear()
-        toolbar.inflateMenu(menuId)
-        toolbarMenuId = menuId
-
-        setPaddingForToolbar()
-    }
-
-    fun setTitle(title: String?) {
-        setPaddingForToolbar()
-
-        toolbar.title = title.orEmpty()
-    }
-
-    fun setOnMenuItemClickListener(listener: Toolbar.OnMenuItemClickListener) {
-        toolbar.setOnMenuItemClickListener(listener)
-    }
-
-    fun styleToolbarWithLightTheme() {
-        setPaddingForToolbar()
-        setBackgroundResource(R.color.white)
-
-        toolbar.setTitleTextAppearance(context, R.style.AppToolbarTitleTextAppearance_Dark)
-        toolbar.navigationIcon?.setTint(ContextCompat.getColor(context, R.color.blue_dark))
-
-        invalidate()
-        requestLayout()
-    }
-
-    fun setBackButton(show: Boolean) {
-        setPaddingForToolbar()
-
-        toolbar.navigationIcon =
-            if (show) ContextCompat.getDrawable(context, R.drawable.ic_arrow_back) else null
-
-        toolbar.navigationIcon?.setTint(
-            ContextCompat.getColor(
-                context,
-                R.color.blue_dark
-            )
-        )
-    }
-
-    fun setBackButtonListener(listener: () -> Unit) {
-        toolbar.apply {
-            setNavigationOnClickListener {
-                listener.invoke()
-            }
-        }
-    }
+  }
 }

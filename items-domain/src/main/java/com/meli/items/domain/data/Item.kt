@@ -1,6 +1,8 @@
 package com.meli.items.domain.data
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.meli.items.entities.ResultX
 
 @Entity(tableName = "items")
@@ -14,12 +16,6 @@ data class Item(
   @ColumnInfo(name = "attributes") val attributes: List<Attribute>
 )
 
-
-
-
-
-
-
 fun List<ResultX>.toBaseModel(): List<Item> = map { it.toBaseModel() }
 fun ResultX.toBaseModel(): Item = Item(
 
@@ -27,16 +23,16 @@ fun ResultX.toBaseModel(): Item = Item(
   title = title ?: "",
   thumbnail = thumbnail ?: "",
   price = price ?: 0.0,
-    seller = Seller(
-      id = seller?.id ?: 0L,
-      nickname = seller?.nickname ?: ""
-    ),
-    address = Address(
-      stateId = address?.stateId ?: "",
-      stateName = address?.stateName ?: "",
-      cityName = address?.cityName ?: ""
-    ),
-      attributes = attributes?.map { attr ->
+  seller = Seller(
+    id = seller?.id ?: 0L,
+    nickname = seller?.nickname ?: ""
+  ),
+  address = Address(
+    stateId = address?.stateId ?: "",
+    stateName = address?.stateName ?: "",
+    cityName = address?.cityName ?: ""
+  ),
+  attributes = attributes?.map { attr ->
     Attribute(
       id = attr.id ?: "",
       name = attr.name ?: "",

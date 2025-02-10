@@ -17,17 +17,17 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var logger: Logger
+  @Inject
+  lateinit var logger: Logger
 
-    private val binding by viewBinding(ActivityHomeBinding::inflate)
+  private val binding by viewBinding(ActivityHomeBinding::inflate)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
+  override fun onCreate(savedInstanceState: Bundle?) {
+    installSplashScreen()
 
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    super.onCreate(savedInstanceState)
+    setContentView(binding.root)
 
-        logger.d("HomeActivity started")
-    }
+    logger.d("HomeActivity started")
+  }
 }

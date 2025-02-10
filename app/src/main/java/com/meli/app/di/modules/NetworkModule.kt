@@ -4,11 +4,11 @@ import androidx.annotation.VisibleForTesting
 import com.app.base.interfaces.Logger
 import com.app.core.di.BasePath
 import com.app.core.di.OkHttpClientBasic
-import com.app.core.di.RetrofitNullSerializationEnabled
 import com.app.core.di.RetrofitMeli
+import com.app.core.di.RetrofitNullSerializationEnabled
 import com.app.core.network.ServerInterceptor
-import com.squareup.moshi.Moshi
 import com.meli.app.BuildConfig
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

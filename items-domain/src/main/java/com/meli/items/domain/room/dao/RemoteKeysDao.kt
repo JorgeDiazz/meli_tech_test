@@ -12,12 +12,12 @@ import com.meli.items.entities.RemoteKeysRoom
 @Dao
 interface RemoteKeysDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAll(remoteKey: List<RemoteKeysRoom>)
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  suspend fun insertAll(remoteKey: List<RemoteKeysRoom>)
 
-    @Query("SELECT * FROM remote_keys WHERE repo_id = :id")
-    suspend fun remoteKeysItemId(id: Int): RemoteKeysRoom
+  @Query("SELECT * FROM remote_keys WHERE repo_id = :id")
+  suspend fun remoteKeysItemId(id: Int): RemoteKeysRoom
 
-    @Query("DELETE FROM remote_keys")
-    suspend fun clearRemoteKeys()
+  @Query("DELETE FROM remote_keys")
+  suspend fun clearRemoteKeys()
 }

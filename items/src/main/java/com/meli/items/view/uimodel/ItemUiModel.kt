@@ -8,7 +8,7 @@ data class ItemUiModel(
   val id: Int,
   val title: String,
   val thumbnail: String,
-  val price : String,
+  val price: String,
   val seller: SellerUiModel,
   val attributes: List<AttributeUiModel>
 ) : Parcelable

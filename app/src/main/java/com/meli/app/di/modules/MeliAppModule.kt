@@ -11,9 +11,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object MeliAppModule {
-    @Provides
-    @Singleton
-    fun providesContentResolver(context: Context): ContentResolver {
-        return context.contentResolver
-    }
+  @Provides
+  @Singleton
+  fun providesContentResolver(context: Context): ContentResolver {
+    return context.contentResolver
+  }
 }

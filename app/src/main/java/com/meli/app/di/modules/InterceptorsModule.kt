@@ -1,7 +1,7 @@
 package com.meli.app.di.modules
 
-import com.app.core.network.ServerInterceptor
 import com.app.core.network.NetworkConnectivityInterceptor
+import com.app.core.network.ServerInterceptor
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

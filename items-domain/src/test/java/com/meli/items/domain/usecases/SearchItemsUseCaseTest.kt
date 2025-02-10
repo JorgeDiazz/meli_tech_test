@@ -15,107 +15,107 @@ import org.junit.jupiter.api.Test
 @ExperimentalPagingApi
 class SearchItemsUseCaseTest {
 
-    private lateinit var itemsRepository: IItemsRepository
-    private lateinit var searchItemsUseCase: SearchItemsUseCase
+  private lateinit var itemsRepository: IItemsRepository
+  private lateinit var searchItemsUseCase: SearchItemsUseCase
 
-    @BeforeEach
-    fun setup() {
-        itemsRepository = mockk(relaxed = true)
-        searchItemsUseCase = SearchItemsUseCase(itemsRepository)
+  @BeforeEach
+  fun setup() {
+    itemsRepository = mockk(relaxed = true)
+    searchItemsUseCase = SearchItemsUseCase(itemsRepository)
+  }
+
+  @Test
+  fun givenEmptyQuery_whenExecute_thenUseDefaultSearchTerm() = runTest {
+    // GIVEN
+    val emptyQuery = ""
+    val defaultSearch = "celular"
+    val expectedPagingData = PagingData.empty<Item>()
+    coEvery {
+      itemsRepository.searchItems(
+        query = defaultSearch,
+        pagingConfig = any()
+      )
+    } returns flowOf(expectedPagingData)
+
+    // WHEN
+    val result = searchItemsUseCase.execute(emptyQuery)
+
+    // THEN
+    verify {
+      itemsRepository.searchItems(
+        query = defaultSearch,
+        pagingConfig = any()
+      )
     }
+  }
 
-    @Test
-    fun givenEmptyQuery_whenExecute_thenUseDefaultSearchTerm() = runTest {
-        // GIVEN
-        val emptyQuery = ""
-        val defaultSearch = "celular"
-        val expectedPagingData = PagingData.empty<Item>()
-        coEvery {
-            itemsRepository.searchItems(
-                query = defaultSearch,
-                pagingConfig = any()
-            )
-        } returns flowOf(expectedPagingData)
+  @Test
+  fun givenSpecificQuery_whenExecute_thenUseProvidedQuery() = runTest {
+    // GIVEN
+    val specificQuery = "iphone"
+    val expectedPagingData = PagingData.empty<Item>()
+    coEvery {
+      itemsRepository.searchItems(
+        query = specificQuery,
+        pagingConfig = any()
+      )
+    } returns flowOf(expectedPagingData)
 
-        // WHEN
-        val result = searchItemsUseCase.execute(emptyQuery)
+    // WHEN
+    searchItemsUseCase.execute(specificQuery)
 
-        // THEN
-        verify {
-            itemsRepository.searchItems(
-                query = defaultSearch,
-                pagingConfig = any()
-            )
-        }
+    // THEN
+    verify {
+      itemsRepository.searchItems(
+        query = specificQuery,
+        pagingConfig = any()
+      )
     }
+  }
 
-    @Test
-    fun givenSpecificQuery_whenExecute_thenUseProvidedQuery() = runTest {
-        // GIVEN
-        val specificQuery = "iphone"
-        val expectedPagingData = PagingData.empty<Item>()
-        coEvery {
-            itemsRepository.searchItems(
-                query = specificQuery,
-                pagingConfig = any()
-            )
-        } returns flowOf(expectedPagingData)
+  @Test
+  fun givenQueryWithSpaces_whenExecute_thenUseTrimmedQuery() = runTest {
+    // GIVEN
+    val queryWithSpaces = "  samsung s23  "
+    val trimmedQuery = "samsung s23"
+    val expectedPagingData = PagingData.empty<Item>()
 
-        // WHEN
-        searchItemsUseCase.execute(specificQuery)
+    coEvery {
+      itemsRepository.searchItems(
+        query = trimmedQuery,
+        pagingConfig = any()
+      )
+    } returns flowOf(expectedPagingData)
 
-        // THEN
-        verify {
-            itemsRepository.searchItems(
-                query = specificQuery,
-                pagingConfig = any()
-            )
-        }
+    // WHEN
+    val result = searchItemsUseCase.execute(queryWithSpaces)
+
+    // THEN
+    verify {
+      itemsRepository.searchItems(
+        query = trimmedQuery,
+        pagingConfig = any()
+      )
     }
+  }
 
-    @Test
-    fun givenQueryWithSpaces_whenExecute_thenUseTrimmedQuery() = runTest {
-        // GIVEN
-        val queryWithSpaces = "  samsung s23  "
-        val trimmedQuery = "samsung s23"
-        val expectedPagingData = PagingData.empty<Item>()
+  @Test
+  fun givenRepositoryReturnsData_whenExecute_thenReturnSameFlow() = runTest {
+    // GIVEN
+    val query = "test"
+    val expectedPagingData = PagingData.empty<Item>()
+    val expectedFlow = flowOf(expectedPagingData)
+    coEvery {
+      itemsRepository.searchItems(
+        query = query,
+        pagingConfig = any()
+      )
+    } returns expectedFlow
 
-        coEvery {
-            itemsRepository.searchItems(
-                query = trimmedQuery,
-                pagingConfig = any()
-            )
-        } returns flowOf(expectedPagingData)
+    // WHEN
+    val result = searchItemsUseCase.execute(query)
 
-        // WHEN
-        val result = searchItemsUseCase.execute(queryWithSpaces)
-
-        // THEN
-        verify {
-            itemsRepository.searchItems(
-                query = trimmedQuery,
-                pagingConfig = any()
-            )
-        }
-    }
-
-    @Test
-    fun givenRepositoryReturnsData_whenExecute_thenReturnSameFlow() = runTest {
-        // GIVEN
-        val query = "test"
-        val expectedPagingData = PagingData.empty<Item>()
-        val expectedFlow = flowOf(expectedPagingData)
-        coEvery {
-            itemsRepository.searchItems(
-                query = query,
-                pagingConfig = any()
-            )
-        } returns expectedFlow
-
-        // WHEN
-        val result = searchItemsUseCase.execute(query)
-
-        // THEN
-        assert(result == expectedFlow)
-    }
+    // THEN
+    assert(result == expectedFlow)
+  }
 }

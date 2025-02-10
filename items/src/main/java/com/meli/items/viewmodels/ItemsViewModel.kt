@@ -11,9 +11,9 @@ import com.app.core.interfaces.AppResources
 import com.meli.items.domain.data.Item
 import com.meli.items.domain.data.ItemsState
 import com.meli.items.qualifiers.GetItems
+import com.meli.items.view.uimodel.AttributeUiModel
 import com.meli.items.view.uimodel.ItemUiModel
 import com.meli.items.view.uimodel.SellerUiModel
-import com.meli.items.view.uimodel.AttributeUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -25,9 +25,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-
-
 
 /**
  * Represents the ViewModel layer of ItemsFragment & ItemDetailsFragment.

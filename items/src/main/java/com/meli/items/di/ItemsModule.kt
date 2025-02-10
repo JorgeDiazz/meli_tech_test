@@ -24,5 +24,4 @@ object ItemsModule {
   fun providesGetItemsUseCase(itemsRepository: IItemsRepository): FlowUseCase<String, PagingData<Item>> {
     return SearchItemsUseCase(itemsRepository)
   }
-
 }

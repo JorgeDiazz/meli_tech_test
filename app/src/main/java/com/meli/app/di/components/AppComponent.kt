@@ -3,7 +3,13 @@ package com.meli.app.di.components
 import android.app.Application
 import androidx.paging.ExperimentalPagingApi
 import com.app.core.CoreComponent
-import com.meli.app.di.modules.*
+import com.meli.app.di.modules.ActivityAggregatorModule
+import com.meli.app.di.modules.BaseModule
+import com.meli.app.di.modules.CacheModule
+import com.meli.app.di.modules.FragmentModule
+import com.meli.app.di.modules.LoggerModule
+import com.meli.app.di.modules.MeliAppModule
+import com.meli.app.di.modules.NetworkModule
 import com.meli.items.di.ItemsModule
 import dagger.BindsInstance
 import dagger.Component
@@ -21,24 +27,23 @@ import kotlinx.serialization.ExperimentalSerializationApi
 @ExperimentalPagingApi
 @ExperimentalSerializationApi
 @Component(
-    modules = [
-        BaseModule::class,
-        NetworkModule::class,
-        ActivityAggregatorModule::class,
-        CacheModule::class,
-        FragmentModule::class,
-        LoggerModule::class,
-        MeliAppModule::class,
-        ItemsModule::class,
-    ]
+  modules = [
+    BaseModule::class,
+    NetworkModule::class,
+    ActivityAggregatorModule::class,
+    CacheModule::class,
+    FragmentModule::class,
+    LoggerModule::class,
+    MeliAppModule::class,
+    ItemsModule::class,
+  ]
 )
 interface AppComponent : CoreComponent {
-    @Component.Builder
-    interface Builder {
-        @BindsInstance
-        fun application(application: Application): Builder
+  @Component.Builder
+  interface Builder {
+    @BindsInstance
+    fun application(application: Application): Builder
 
-        fun build(): AppComponent
-    }
-
+    fun build(): AppComponent
+  }
 }

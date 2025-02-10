@@ -51,7 +51,7 @@ class RoomConverters {
     return try {
       json.decodeFromString(value)
     } catch (e: Exception) {
-      Seller(0L, "")  // Default empty seller
+      Seller(0L, "") // Default empty seller
     }
   }
 
@@ -65,7 +65,7 @@ class RoomConverters {
     return try {
       json.decodeFromString(value)
     } catch (e: Exception) {
-      Address("", "", "")  // Default empty address
+      Address("", "", "") // Default empty address
     }
   }
 }

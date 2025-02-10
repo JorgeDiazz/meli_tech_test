@@ -12,10 +12,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object CacheModule {
-    @Provides
-    @Singleton
-    fun providesCacheImplementation(context: Context): Cache {
-        val preferencesName = "general-cache"
-        return SharedPreferencesCache(preferencesName, context.applicationContext)
-    }
+  @Provides
+  @Singleton
+  fun providesCacheImplementation(context: Context): Cache {
+    val preferencesName = "general-cache"
+    return SharedPreferencesCache(preferencesName, context.applicationContext)
+  }
 }

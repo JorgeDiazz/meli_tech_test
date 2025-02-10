@@ -1,55 +1,55 @@
 plugins {
-    id("com.android.library")
-    id("de.mannodermaus.android-junit5")
-    kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+  id("com.android.library")
+  id("de.mannodermaus.android-junit5")
+  kotlin("android")
+  kotlin("kapt")
+  id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdkVersion(Api.compileSDK)
-    defaultConfig {
-        minSdkVersion(Api.minSDK)
-        targetSdkVersion(Api.targetSDK)
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+  compileSdkVersion(Api.compileSDK)
+  defaultConfig {
+    minSdkVersion(Api.minSDK)
+    targetSdkVersion(Api.targetSDK)
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+  }
 
-    lint {
-        abortOnError = false
-    }
+  lint {
+    abortOnError = false
+  }
 
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
+  buildFeatures {
+    dataBinding = true
+    viewBinding = true
+  }
 }
 
 dependencies {
-    implementation(project(":base"))
+  implementation(project(":base"))
 
-    implementation(Libraries.multidex)
+  implementation(Libraries.multidex)
 
-    implementation(Libraries.kotlinJDK)
-    implementation(Libraries.appcompat)
-    implementation(Libraries.androidXCore)
-    implementation(Libraries.constraintLayout)
-    implementation(Libraries.recyclerView)
+  implementation(Libraries.kotlinJDK)
+  implementation(Libraries.appcompat)
+  implementation(Libraries.androidXCore)
+  implementation(Libraries.constraintLayout)
+  implementation(Libraries.recyclerView)
 
-    implementation(Libraries.retrofit)
-    implementation(Libraries.retrofitMoshi)
-    implementation(platform(Libraries.okHttpBoM))
-    implementation(Libraries.okHttpInterceptor)
-    implementation(Libraries.moshi)
-    kapt(AnnotationProcessors.moshiCodegen)
+  implementation(Libraries.retrofit)
+  implementation(Libraries.retrofitMoshi)
+  implementation(platform(Libraries.okHttpBoM))
+  implementation(Libraries.okHttpInterceptor)
+  implementation(Libraries.moshi)
+  kapt(AnnotationProcessors.moshiCodegen)
 
-    implementation(AnnotationProcessors.daggerHilt)
-    kapt(AnnotationProcessors.daggerHiltAndroidCompiler)
-    implementation(AnnotationProcessors.daggerHiltViewModel)
+  implementation(AnnotationProcessors.daggerHilt)
+  kapt(AnnotationProcessors.daggerHiltAndroidCompiler)
+  implementation(AnnotationProcessors.daggerHiltViewModel)
 
-    kapt(Libraries.kotlinxMetadata)
+  kapt(Libraries.kotlinxMetadata)
 
-    Libraries.suiteTest.forEach { testImplementation(it) }
+  Libraries.suiteTest.forEach { testImplementation(it) }
 
-    androidTestImplementation(Libraries.jUnitExtKtx)
-    androidTestImplementation(Libraries.espressoCore)
+  androidTestImplementation(Libraries.jUnitExtKtx)
+  androidTestImplementation(Libraries.espressoCore)
 }

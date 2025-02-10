@@ -21,28 +21,28 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ItemsRepositoryModule {
-    @Provides
-    @Singleton
-    fun providesItemsService(
-        @RetrofitNullSerializationEnabled retrofit: Retrofit
-    ): ItemsService {
-        return retrofit.create(ItemsService::class.java)
-    }
+  @Provides
+  @Singleton
+  fun providesItemsService(
+    @RetrofitNullSerializationEnabled retrofit: Retrofit
+  ): ItemsService {
+    return retrofit.create(ItemsService::class.java)
+  }
 
-    @Provides
-    @Singleton
-    @ExperimentalPagingApi
-    fun providesItemsRepository(
-      context: Context,
-      logger: Logger,
-      cache: Cache,
-      itemsRemoteDataSource: ItemsRemoteDataSource,
-    ): IItemsRepository {
-        val database =
-            Room.databaseBuilder(context, ItemsDatabase::class.java, "items-database")
-                .fallbackToDestructiveMigration()
-                .build()
+  @Provides
+  @Singleton
+  @ExperimentalPagingApi
+  fun providesItemsRepository(
+    context: Context,
+    logger: Logger,
+    cache: Cache,
+    itemsRemoteDataSource: ItemsRemoteDataSource,
+  ): IItemsRepository {
+    val database =
+      Room.databaseBuilder(context, ItemsDatabase::class.java, "items-database")
+        .fallbackToDestructiveMigration()
+        .build()
 
-        return ItemsRepository(logger, cache, itemsRemoteDataSource, database)
-    }
+    return ItemsRepository(logger, cache, itemsRemoteDataSource, database)
+  }
 }
