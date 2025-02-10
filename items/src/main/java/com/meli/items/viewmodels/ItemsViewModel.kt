@@ -47,7 +47,7 @@ class ItemsViewModel @Inject constructor(
   val newsSharedFlow: SharedFlow<ItemsState> = _newsSharedFlow
 
   fun onViewActive() {
-    searchItems() // Default search
+    searchItems()
   }
 
   fun searchItems(query: String = "") = viewModelScope.launch {

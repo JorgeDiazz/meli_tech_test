@@ -80,6 +80,6 @@ In order to sign your debug app build using _debug-keystore.jks_ keystore, these
 
 ## Using the app
 
-<img src="docs/images/demo.webm" width="350" height="600"/>
+<img src="docs/images/demo.gif" width="350" height="600"/>
 
 
